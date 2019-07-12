@@ -14,7 +14,6 @@ promise
   .then(res => {
     //Success case:
     const newArray = res.data.topics
-    console.log("newArr after promise", newArray)
     newArray.forEach(t => {
         createTab(t)
     });
@@ -41,5 +40,3 @@ function createTab(inputTopic) {
 
     return topics
 }
-
-createTab()
