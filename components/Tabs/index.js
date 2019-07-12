@@ -7,3 +7,36 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
+
+const promise = axios.get("https://lambda-times-backend.herokuapp.com/topics")
+
+promise
+  .then(res => {
+    //Success case:
+    const newArray = res.data.topics
+    newArray.forEach(t => {
+        createTab(t)
+    });
+  })
+  .catch(res => {
+    // Handles failure:
+    console.log('There was a problem. Please try again later', res)
+  })
+
+//select .topics element to anchor new elements to
+const topics = document.querySelector(".topics")  
+
+//create new tabs for each topic in promise array
+function createTab(inputTopic) {
+    //create new elements and add classes 
+    const newTab = document.createElement("div")
+    newTab.classList.add("tab")
+
+    //append chirren
+    topics.appendChild(newTab)
+
+    //set textContent
+    newTab.textContent = inputTopic
+
+    return topics
+}
