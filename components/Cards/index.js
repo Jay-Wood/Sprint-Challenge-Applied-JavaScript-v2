@@ -21,17 +21,13 @@ const cardPromise = axios.get("https://lambda-times-backend.herokuapp.com/articl
 cardPromise
     .then(res => {
     //Success case:
-    console.log("cardsData from promise" , res)
     const resArticles = res.data.articles
     console.log("res.data.articles", resArticles)
     for (topic in resArticles) {
-        console.log("topic in for in:", topic)
         resArticles[topic].forEach(article => {
-            console.log("art", article)
             createCard(article)
         })
     }
-
     })
     .catch(res => {
     // Handles failure:
@@ -42,7 +38,6 @@ cardPromise
 const cardsContainer = document.querySelector(".cards-container")
 
 function createCard(inputObj) {
-    console.log("inputObj at function start:", inputObj)
     //create new elements and add class lists
     const card = document.createElement("div")
     card.classList.add("card")
@@ -52,8 +47,9 @@ function createCard(inputObj) {
     author.classList.add("author")
     const imgContainer = document.createElement("div")
     imgContainer.classList.add("img-container")
-    const img = document.createElement("img")
+    const aImg = document.createElement("img")
     const byline = document.createElement("span")
+    const testDiv = document.createElement("div")
 
     //append chirren
     cardsContainer.appendChild(card)
@@ -61,12 +57,12 @@ function createCard(inputObj) {
     card.appendChild(author)
     author.appendChild(imgContainer)
     author.appendChild(byline)
-    imgContainer.appendChild(img)
+    imgContainer.appendChild(aImg)
+    author.appendChild(testDiv)
 
     //set textContent
     headline.textContent = inputObj.headline
-    console.log("inputObj in function", inputObj)
-
+    byline.textContent = inputObj.authorName
+    aImg.src = inputObj.authorPhoto
 }
 
-// createCard(cardPromise)
